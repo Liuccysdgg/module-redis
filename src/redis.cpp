@@ -157,7 +157,7 @@ sol::object module::redis_pool::reply(sol::this_state* ts,redisContext* ctx, red
     catch (const std::exception& e)
     {
         freeReplyObject(reply);
-        throw e;
+        throw ylib::exception(e.what());
     }
     freeReplyObject(reply);
     return result;
@@ -194,7 +194,6 @@ sol::object module::redis::command(const std::string& cmd, sol::this_state ts)
         if (m_context->err)
         {
             m_context = m_pool->reget(m_context);
-
             reply = (redisReply*)redisCommand(m_context, cmd.c_str());
         }
         else
