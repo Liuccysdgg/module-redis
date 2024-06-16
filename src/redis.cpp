@@ -206,14 +206,14 @@ sol::object module::redis::command(const std::string& cmd, sol::this_state ts)
 
 void module::redis_regist(sol::state* lua)
 {
-    lua->new_usertype<module::redis_pool>("redis_pool",
+    lua->new_usertype<module::redis_pool>("fw_redis_pool",
         "close", &module::redis_pool::close,
         "start", &module::redis_pool::start,
         "get", &module::redis_pool::get,
         "pop_size", &module::redis_pool::pop_size,
         "self", &module::redis_pool::self
     );
-    lua->new_usertype<module::redis>("redis_conn",
+    lua->new_usertype<module::redis>("fw_redis_conn",
         "command", &module::redis::command
     );
 }
