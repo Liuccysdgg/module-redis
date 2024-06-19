@@ -2,7 +2,11 @@
 #include "base/define.h"
 #include "util/queue.hpp"
 #include "sol/sol.hpp"
-#include "hiredis.h"
+#ifdef _WIN32
+#include "redis.h"
+#else
+#include <hiredis/hiredis.h>
+#endif
 #include "basemodule.h"
 namespace module
 {
